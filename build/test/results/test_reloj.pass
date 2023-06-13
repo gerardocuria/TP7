@@ -3,16 +3,20 @@
   :path: test
   :file: test_reloj.c
 :successes:
-- :test: test_start_up
+- :test: test_reloj_arranca_hora_invalida
   :line: 7
+  :message: ''
+  :unity_test_time: 0
+- :test: test_ajustar_hora
+  :line: 20
   :message: ''
   :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 1
-  :passed: 1
+  :total: 2
+  :passed: 2
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.0020913889998155355
+:time: 0.001887450000140234
