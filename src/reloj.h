@@ -16,3 +16,9 @@ bool ClockGetAlarm(clock_t reloj,uint8_t * alarma, int size);
 
 
 bool ClockSetAlarm(clock_t reloj,const uint8_t * alarma, int size);
+
+bool Alarmon(clock_t reloj);
+
+bool Alarmoff(clock_t reloj);
+
+bool consultaralarma(clock_t reloj);

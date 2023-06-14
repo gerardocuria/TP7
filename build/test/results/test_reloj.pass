@@ -39,12 +39,20 @@
   :line: 147
   :message: ''
   :unity_test_time: 0
+- :test: test_habilitar__alarma
+  :line: 162
+  :message: ''
+  :unity_test_time: 0
+- :test: test_deshabilitar_alarma
+  :line: 176
+  :message: ''
+  :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 9
-  :passed: 9
+  :total: 11
+  :passed: 11
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.008639236999442801
+:time: 0.008936623999034055

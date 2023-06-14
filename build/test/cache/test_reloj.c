@@ -283,3 +283,61 @@ void test_ajustar_alarma(void){
    ), (UNITY_UINT)(158), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
+
+
+
+
+
+void test_habilitar__alarma(void){
+
+    uint8_t hora[6]= {0x00};
+
+    uint8_t alarma[6]= {0x00};
+
+
+
+    clock_t reloj = ClockCreate(5);
+
+
+
+    ClockSetTime(reloj,hora,6);
+
+    ClockSetAlarm(reloj,alarma,6);
+
+
+
+    Alarmon(reloj);
+
+
+
+    do {if ((consultaralarma(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(173)));}} while(0);
+
+}
+
+
+
+void test_deshabilitar_alarma(void){
+
+    uint8_t hora[6]= {0x00};
+
+    uint8_t alarma[6]= {0x00};
+
+
+
+    clock_t reloj = ClockCreate(5);
+
+
+
+    ClockSetTime(reloj,hora,6);
+
+    ClockSetAlarm(reloj,alarma,6);
+
+
+
+    Alarmoff(reloj);
+
+
+
+    do {if (!(consultaralarma(reloj))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(187)));}} while(0);
+
+}
