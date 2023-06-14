@@ -11,16 +11,36 @@
   :line: 22
   :message: ''
   :unity_test_time: 0
-- :test: test_base_tiempo
+- :test: test_tiempo_unsegundo
   :line: 43
+  :message: ''
+  :unity_test_time: 0
+- :test: test_tiempo_diezsegundo
+  :line: 55
+  :message: ''
+  :unity_test_time: 0
+- :test: test_tiempo_unminuto
+  :line: 67
+  :message: ''
+  :unity_test_time: 0
+- :test: test_tiempo_diezminutos
+  :line: 79
+  :message: ''
+  :unity_test_time: 0
+- :test: test_tiempo_unahora
+  :line: 91
+  :message: ''
+  :unity_test_time: 0
+- :test: test_tiempo_24horas
+  :line: 103
   :message: ''
   :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 3
-  :passed: 3
+  :total: 8
+  :passed: 8
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.0016844990000208782
+:time: 0.008701036000275053

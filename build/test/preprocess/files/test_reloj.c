@@ -88,7 +88,7 @@ void SimulateTime(uint32_t seconds, clock_t reloj){
 
 
 
-void test_base_tiempo(void){
+void test_tiempo_unsegundo(void){
 
         static const uint8_t ESPERANDO[] = {0,0,0,0,0,1};
 
@@ -104,12 +104,152 @@ void test_base_tiempo(void){
 
 
 
-        do {if ((ClockGetTime(reloj,hora,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(51)));}} while(0);
+        ClockGetTime(reloj,hora,6);
 
         UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
 
        ((void *)0)
 
        ), (UNITY_UINT)(52), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+}
+
+
+
+void test_tiempo_diezsegundo(void){
+
+        static const uint8_t ESPERANDO[] = {0,0,0,0,1,0};
+
+        uint8_t hora[6]= {0x00};
+
+        clock_t reloj = ClockCreate(5);
+
+        ClockSetTime(reloj,hora,6);
+
+
+
+        SimulateTime(10, reloj);
+
+
+
+        ClockGetTime(reloj,hora,6);
+
+        UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
+
+       ((void *)0)
+
+       ), (UNITY_UINT)(64), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+}
+
+
+
+void test_tiempo_unminuto(void){
+
+        static const uint8_t ESPERANDO[] = {0,0,0,1,0,0};
+
+        uint8_t hora[6]= {0x00};
+
+        clock_t reloj = ClockCreate(5);
+
+        ClockSetTime(reloj,hora,6);
+
+
+
+        SimulateTime(60, reloj);
+
+
+
+        ClockGetTime(reloj,hora,6);
+
+        UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
+
+       ((void *)0)
+
+       ), (UNITY_UINT)(76), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+}
+
+
+
+void test_tiempo_diezminutos(void){
+
+        static const uint8_t ESPERANDO[] = {0,0,1,0,0,0};
+
+        uint8_t hora[6]= {0x00};
+
+        clock_t reloj = ClockCreate(5);
+
+        ClockSetTime(reloj,hora,6);
+
+
+
+        SimulateTime(600, reloj);
+
+
+
+        ClockGetTime(reloj,hora,6);
+
+        UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
+
+       ((void *)0)
+
+       ), (UNITY_UINT)(88), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+}
+
+
+
+void test_tiempo_unahora(void){
+
+        static const uint8_t ESPERANDO[] = {0,1,0,0,0,0};
+
+        uint8_t hora[6]= {0x00};
+
+        clock_t reloj = ClockCreate(5);
+
+        ClockSetTime(reloj,hora,6);
+
+
+
+        SimulateTime(3600, reloj);
+
+
+
+        ClockGetTime(reloj,hora,6);
+
+        UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
+
+       ((void *)0)
+
+       ), (UNITY_UINT)(100), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+}
+
+
+
+void test_tiempo_24horas(void){
+
+        static const uint8_t ESPERANDO[] = {0,0,0,0,0,0};
+
+        uint8_t hora[6]= {0x00};
+
+        clock_t reloj = ClockCreate(5);
+
+        ClockSetTime(reloj,hora,6);
+
+
+
+        SimulateTime(3600*24, reloj);
+
+
+
+        ClockGetTime(reloj,hora,6);
+
+        UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
+
+       ((void *)0)
+
+       ), (UNITY_UINT)(112), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }

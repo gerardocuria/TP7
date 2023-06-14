@@ -12,7 +12,12 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_reloj_arranca_hora_invalida(void);
 extern void test_ajustar_hora(void);
-extern void test_base_tiempo(void);
+extern void test_tiempo_unsegundo(void);
+extern void test_tiempo_diezsegundo(void);
+extern void test_tiempo_unminuto(void);
+extern void test_tiempo_diezminutos(void);
+extern void test_tiempo_unahora(void);
+extern void test_tiempo_24horas(void);
 
 
 /*=======Mock Management=====*/
@@ -85,7 +90,12 @@ int main(void)
   UnityBegin("test_reloj.c");
   run_test(test_reloj_arranca_hora_invalida, "test_reloj_arranca_hora_invalida", 9);
   run_test(test_ajustar_hora, "test_ajustar_hora", 22);
-  run_test(test_base_tiempo, "test_base_tiempo", 43);
+  run_test(test_tiempo_unsegundo, "test_tiempo_unsegundo", 43);
+  run_test(test_tiempo_diezsegundo, "test_tiempo_diezsegundo", 55);
+  run_test(test_tiempo_unminuto, "test_tiempo_unminuto", 67);
+  run_test(test_tiempo_diezminutos, "test_tiempo_diezminutos", 79);
+  run_test(test_tiempo_unahora, "test_tiempo_unahora", 91);
+  run_test(test_tiempo_24horas, "test_tiempo_24horas", 103);
 
   return UnityEnd();
 }

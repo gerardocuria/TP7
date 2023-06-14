@@ -40,7 +40,7 @@ void SimulateTime(uint32_t seconds, clock_t reloj){
 }
 
 
-void test_base_tiempo(void){
+void test_tiempo_unsegundo(void){
         static const uint8_t ESPERANDO[] = {0,0,0,0,0,1};
         uint8_t hora[6]= {0x00};
         clock_t reloj = ClockCreate(5);             
@@ -48,10 +48,69 @@ void test_base_tiempo(void){
 
         SimulateTime(1, reloj);
 
-        TEST_ASSERT_TRUE(ClockGetTime(reloj,hora,6)); //lo de reloj copio en hora
+        ClockGetTime(reloj,hora,6); //lo de reloj copio en hora
         TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
 }
 
+void test_tiempo_diezsegundo(void){
+        static const uint8_t ESPERANDO[] = {0,0,0,0,1,0};
+        uint8_t hora[6]= {0x00};
+        clock_t reloj = ClockCreate(5);             
+        ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+
+        SimulateTime(10, reloj);
+
+        ClockGetTime(reloj,hora,6); //lo de reloj copio en hora
+        TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
+}
+
+void test_tiempo_unminuto(void){
+        static const uint8_t ESPERANDO[] = {0,0,0,1,0,0};
+        uint8_t hora[6]= {0x00};
+        clock_t reloj = ClockCreate(5);             
+        ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+
+        SimulateTime(60, reloj);
+
+        ClockGetTime(reloj,hora,6); //lo de reloj copio en hora
+        TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
+}
+
+void test_tiempo_diezminutos(void){
+        static const uint8_t ESPERANDO[] = {0,0,1,0,0,0};
+        uint8_t hora[6]= {0x00};
+        clock_t reloj = ClockCreate(5);             
+        ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+
+        SimulateTime(600, reloj);
+
+        ClockGetTime(reloj,hora,6); //lo de reloj copio en hora
+        TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
+}
+
+void test_tiempo_unahora(void){
+        static const uint8_t ESPERANDO[] = {0,1,0,0,0,0};
+        uint8_t hora[6]= {0x00};
+        clock_t reloj = ClockCreate(5);             
+        ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+
+        SimulateTime(3600, reloj);
+
+        ClockGetTime(reloj,hora,6); //lo de reloj copio en hora
+        TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
+}
+
+void test_tiempo_24horas(void){
+        static const uint8_t ESPERANDO[] = {0,0,0,0,0,0};
+        uint8_t hora[6]= {0x00};
+        clock_t reloj = ClockCreate(5);             
+        ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+
+        SimulateTime(3600*24, reloj);
+
+        ClockGetTime(reloj,hora,6); //lo de reloj copio en hora
+        TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
+}
 
 
 
