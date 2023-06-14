@@ -22,6 +22,8 @@ extern void test_ajustar_alarma(void);
 extern void test_habilitar__alarma(void);
 extern void test_deshabilitar_alarma(void);
 extern void test_alarma_igual_reloj(void);
+extern void test_avanzar_reloj_suenaalarma(void);
+extern void test_avanzar_reloj_nosuenaalarma(void);
 
 
 /*=======Mock Management=====*/
@@ -92,18 +94,20 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_reloj.c");
-  run_test(test_reloj_arranca_hora_invalida, "test_reloj_arranca_hora_invalida", 9);
-  run_test(test_ajustar_hora, "test_ajustar_hora", 22);
-  run_test(test_tiempo_unsegundo, "test_tiempo_unsegundo", 43);
-  run_test(test_tiempo_diezsegundo, "test_tiempo_diezsegundo", 55);
-  run_test(test_tiempo_unminuto, "test_tiempo_unminuto", 67);
-  run_test(test_tiempo_diezminutos, "test_tiempo_diezminutos", 79);
-  run_test(test_tiempo_unahora, "test_tiempo_unahora", 91);
-  run_test(test_tiempo_24horas, "test_tiempo_24horas", 103);
-  run_test(test_ajustar_alarma, "test_ajustar_alarma", 147);
-  run_test(test_habilitar__alarma, "test_habilitar__alarma", 162);
-  run_test(test_deshabilitar_alarma, "test_deshabilitar_alarma", 176);
-  run_test(test_alarma_igual_reloj, "test_alarma_igual_reloj", 191);
+  run_test(test_reloj_arranca_hora_invalida, "test_reloj_arranca_hora_invalida", 16);
+  run_test(test_ajustar_hora, "test_ajustar_hora", 29);
+  run_test(test_tiempo_unsegundo, "test_tiempo_unsegundo", 50);
+  run_test(test_tiempo_diezsegundo, "test_tiempo_diezsegundo", 62);
+  run_test(test_tiempo_unminuto, "test_tiempo_unminuto", 74);
+  run_test(test_tiempo_diezminutos, "test_tiempo_diezminutos", 86);
+  run_test(test_tiempo_unahora, "test_tiempo_unahora", 98);
+  run_test(test_tiempo_24horas, "test_tiempo_24horas", 110);
+  run_test(test_ajustar_alarma, "test_ajustar_alarma", 123);
+  run_test(test_habilitar__alarma, "test_habilitar__alarma", 138);
+  run_test(test_deshabilitar_alarma, "test_deshabilitar_alarma", 152);
+  run_test(test_alarma_igual_reloj, "test_alarma_igual_reloj", 167);
+  run_test(test_avanzar_reloj_suenaalarma, "test_avanzar_reloj_suenaalarma", 190);
+  run_test(test_avanzar_reloj_nosuenaalarma, "test_avanzar_reloj_nosuenaalarma", 217);
 
   return UnityEnd();
 }

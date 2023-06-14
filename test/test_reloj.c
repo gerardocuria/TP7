@@ -1,5 +1,12 @@
-//al iniciar el reloj deberia estar en 00:00 y con hora invalida
+// Al inicializar el reloj está en 00:00 y con hora invalida.
+// Al ajustar la hora el reloj queda en hora y es válida.
+// Después de n ciclos de reloj la hora avanza un segundo, diez segundos, un minutos, diez minutos, una hora, diez horas y un día completo.
+// Fijar la hora de la alarma y consultarla.
 
+// Fijar la alarma y avanzar el reloj para que suene.
+// Fijar la alarma, deshabilitarla y avanzar el reloj para no suene.
+// Hacer sonar la alarma y posponerla.
+// Hacer sonar la alarma y cancelarla hasta el otro dia..
 
 #include "unity.h"
 #include "reloj.h"
@@ -113,37 +120,6 @@ void test_tiempo_24horas(void){
 }
 
 
-
-/*
-void test_fijar_y_consultar_alarma(void) {
-    static const uint8_t HORA_ALARMA[] = {10, 30, 0, 0, 0, 0};
-    uint8_t hora_consultada[6] = {0xFF};
-    clock_t reloj = ClockCreate(5);
-    
-    TEST_ASSERT_TRUE(SetAlarmTime(reloj, HORA_ALARMA, 6));
-    TEST_ASSERT_TRUE(GetAlarmTime(reloj, hora_consultada, 6));
-    TEST_ASSERT_EQUAL_UINT8_ARRAY(HORA_ALARMA, hora_consultada, 6);
-}*/
-/*
-void test_fijar_y_avisar_alarma(void) {
-    static const uint8_t HORA_ALARMA[] = {12, 0, 0, 0, 0, 0};
-    uint8_t hora_actual[6] = {12, 0, 0, 0, 0, 0};
-    clock_t reloj = ClockCreate(5);
-    
-    TEST_ASSERT_TRUE(ClockSetAlarmTime(reloj, HORA_ALARMA, 6));
-    
-    // Avanzar el reloj hasta que la hora actual coincida con la alarma
-    while (!ClockAlarmActivated(reloj)) {
-        ClockUpdate(reloj);
-        ClockGetTime(reloj, hora_actual, 6);
-    }
-    
-    TEST_ASSERT_TRUE(ClockAlarmActivated(reloj));
-}
-*/
-//1:09
-
-
 void test_ajustar_alarma(void){
     static const uint8_t ESPERANDO[] = {0,0,1,2,3,0};
     uint8_t hora[6]= {0x00};
@@ -208,3 +184,59 @@ void test_alarma_igual_reloj(void){
 }
 
 
+// Fijar la alarma y avanzar el reloj para que suene.
+
+
+void test_avanzar_reloj_suenaalarma(void){
+    uint8_t hora[6]={0,0,0,0,0,0};
+    uint8_t alarma[6]={0,0,0,1,0,0};
+
+    clock_t reloj = ClockCreate(5);             
+  
+
+    ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
+    ClockSetAlarm(reloj,alarma,6);  
+
+ 
+
+    Alarmon(reloj);
+
+    SimulateTime(60, reloj);
+
+    ClockGetTime(reloj,hora,6);   //lo de reloj lo compio en hora
+    ClockGetAlarm(reloj,alarma,6); 
+
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(hora,alarma,6);
+    TEST_ASSERT_TRUE(compara(reloj));
+}
+
+
+
+// Fijar la alarma, deshabilitarla y avanzar el reloj para no suene.
+
+void test_avanzar_reloj_nosuenaalarma(void){
+    uint8_t hora[6]={0,0,0,0,0,0};
+    uint8_t alarma[6]={0,0,0,1,0,0};
+
+    clock_t reloj = ClockCreate(5);             
+  
+
+    ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
+    ClockSetAlarm(reloj,alarma,6);  
+
+ 
+
+    Alarmoff(reloj);
+
+    SimulateTime(60, reloj);
+
+    ClockGetTime(reloj,hora,6);   //lo de reloj lo compio en hora
+    ClockGetAlarm(reloj,alarma,6); 
+
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(hora,alarma,6);
+    TEST_ASSERT_FALSE(compara(reloj));
+}
+
+
+// Hacer sonar la alarma y posponerla.
+// Hacer sonar la alarma y cancelarla hasta el otro dia..
