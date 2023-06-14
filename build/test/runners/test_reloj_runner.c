@@ -18,6 +18,7 @@ extern void test_tiempo_unminuto(void);
 extern void test_tiempo_diezminutos(void);
 extern void test_tiempo_unahora(void);
 extern void test_tiempo_24horas(void);
+extern void test_ajustar_alarma(void);
 
 
 /*=======Mock Management=====*/
@@ -96,6 +97,7 @@ int main(void)
   run_test(test_tiempo_diezminutos, "test_tiempo_diezminutos", 79);
   run_test(test_tiempo_unahora, "test_tiempo_unahora", 91);
   run_test(test_tiempo_24horas, "test_tiempo_24horas", 103);
+  run_test(test_ajustar_alarma, "test_ajustar_alarma", 147);
 
   return UnityEnd();
 }

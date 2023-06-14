@@ -5,13 +5,17 @@
 #include <unistd.h>
 #include "reloj.h"
 
-
+struct alarm_s {
+    uint8_t alarma_actual[6];
+    bool valida;
+};
 
 struct clock_s {
     uint8_t hora_actual[6];
     bool valida;
     int tics_por_segundo;
     int conteo_tics;
+    struct alarm_s alarm[1]; 
     //uint8_t hora_alarma[6];
     //bool alarma_habilitada;
 };
@@ -75,3 +79,16 @@ void ClockTick(clock_t reloj){
 }
 
 //tengo que hacer un get time y un set time par la alarmavalida
+
+
+
+bool ClockGetAlarm(clock_t reloj,uint8_t * alarma, int size){
+    memcpy(alarma, reloj->alarm->alarma_actual, size);
+    return reloj->alarm->valida;
+}
+
+bool ClockSetAlarm(clock_t reloj,const uint8_t * alarma, int size){
+    memcpy(reloj->alarm->alarma_actual,alarma, size);
+    reloj->alarm->valida = true;
+    return true;
+}

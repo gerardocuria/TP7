@@ -35,12 +35,16 @@
   :line: 103
   :message: ''
   :unity_test_time: 0
+- :test: test_ajustar_alarma
+  :line: 147
+  :message: ''
+  :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 8
-  :passed: 8
+  :total: 9
+  :passed: 9
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.008701036000275053
+:time: 0.008639236999442801

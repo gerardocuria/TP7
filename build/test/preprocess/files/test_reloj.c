@@ -253,3 +253,33 @@ void test_tiempo_24horas(void){
        ), (UNITY_UINT)(112), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
+
+void test_ajustar_alarma(void){
+
+    static const uint8_t ESPERANDO[] = {0,0,1,2,3,0};
+
+    uint8_t hora[6]= {0x00};
+
+    uint8_t alarma[6]= {0x00};
+
+
+
+    clock_t reloj = ClockCreate(5);
+
+
+
+    ClockSetTime(reloj,hora,6);
+
+    ClockGetTime(reloj,hora,6);
+
+    do {if ((ClockSetAlarm(reloj,ESPERANDO,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(156)));}} while(0);
+
+    do {if ((ClockGetAlarm(reloj,alarma,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(157)));}} while(0);
+
+    UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((alarma)), (UNITY_UINT32)((6)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(158), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+}

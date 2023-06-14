@@ -142,3 +142,18 @@ void test_fijar_y_avisar_alarma(void) {
 }
 */
 //1:09
+
+
+void test_ajustar_alarma(void){
+    static const uint8_t ESPERANDO[] = {0,0,1,2,3,0};
+    uint8_t hora[6]= {0x00};
+    uint8_t alarma[6]= {0x00};
+
+    clock_t reloj = ClockCreate(5);             
+    //ClockSetTime(reloj,ESPERANDO,4);   
+    ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+    ClockGetTime(reloj,hora,6); //lo de reloj copio en horaq                   
+    TEST_ASSERT_TRUE(ClockSetAlarm(reloj,ESPERANDO,6));   
+    TEST_ASSERT_TRUE(ClockGetAlarm(reloj,alarma,6));       
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,alarma,6);
+}
