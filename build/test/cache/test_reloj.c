@@ -6,21 +6,45 @@
 
 
 
+static 
+
+      _Bool 
+
+           buzzer;
+
+
+
+void sonaralarma(void);
+
+
+
+void sonaralarma(void){
+
+    buzzer=
+
+          1
+
+              ;
+
+}
+
+
+
 void test_reloj_arranca_hora_invalida(void){
 
     static const uint8_t ESPERANDO[] = {0,0,0,0,0,0};
 
     uint8_t hora[6]= {0xFF};
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
-    do {if (!(ClockGetTime(reloj,hora,6))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(20)));}} while(0);
+    do {if (!(ClockGetTime(reloj,hora,6))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(28)));}} while(0);
 
     UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(21), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+   ), (UNITY_UINT)(29), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -44,19 +68,19 @@ void test_ajustar_hora(void){
 
 
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
 
 
-    do {if ((ClockSetTime(reloj,ESPERANDO,4))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(35)));}} while(0);
+    do {if ((ClockSetTime(reloj,ESPERANDO,4))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(43)));}} while(0);
 
-    do {if ((ClockGetTime(reloj,hora,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(36)));}} while(0);
+    do {if ((ClockGetTime(reloj,hora,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(44)));}} while(0);
 
     UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((hora)), (UNITY_UINT32)((6)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(37), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+   ), (UNITY_UINT)(45), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -88,7 +112,7 @@ void test_tiempo_unsegundo(void){
 
         uint8_t hora[6]= {0x00};
 
-        clock_t reloj = ClockCreate(5);
+        clock_t reloj = ClockCreate(5,sonaralarma);
 
         ClockSetTime(reloj,hora,6);
 
@@ -104,7 +128,7 @@ void test_tiempo_unsegundo(void){
 
        ((void *)0)
 
-       ), (UNITY_UINT)(59), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+       ), (UNITY_UINT)(67), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -116,7 +140,7 @@ void test_tiempo_diezsegundo(void){
 
         uint8_t hora[6]= {0x00};
 
-        clock_t reloj = ClockCreate(5);
+        clock_t reloj = ClockCreate(5,sonaralarma);
 
         ClockSetTime(reloj,hora,6);
 
@@ -132,7 +156,7 @@ void test_tiempo_diezsegundo(void){
 
        ((void *)0)
 
-       ), (UNITY_UINT)(71), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+       ), (UNITY_UINT)(79), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -144,7 +168,7 @@ void test_tiempo_unminuto(void){
 
         uint8_t hora[6]= {0x00};
 
-        clock_t reloj = ClockCreate(5);
+        clock_t reloj = ClockCreate(5,sonaralarma);
 
         ClockSetTime(reloj,hora,6);
 
@@ -160,7 +184,7 @@ void test_tiempo_unminuto(void){
 
        ((void *)0)
 
-       ), (UNITY_UINT)(83), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+       ), (UNITY_UINT)(91), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -172,7 +196,7 @@ void test_tiempo_diezminutos(void){
 
         uint8_t hora[6]= {0x00};
 
-        clock_t reloj = ClockCreate(5);
+        clock_t reloj = ClockCreate(5,sonaralarma);
 
         ClockSetTime(reloj,hora,6);
 
@@ -188,7 +212,7 @@ void test_tiempo_diezminutos(void){
 
        ((void *)0)
 
-       ), (UNITY_UINT)(95), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+       ), (UNITY_UINT)(103), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -200,7 +224,7 @@ void test_tiempo_unahora(void){
 
         uint8_t hora[6]= {0x00};
 
-        clock_t reloj = ClockCreate(5);
+        clock_t reloj = ClockCreate(5,sonaralarma);
 
         ClockSetTime(reloj,hora,6);
 
@@ -216,7 +240,7 @@ void test_tiempo_unahora(void){
 
        ((void *)0)
 
-       ), (UNITY_UINT)(107), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+       ), (UNITY_UINT)(115), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -228,7 +252,7 @@ void test_tiempo_24horas(void){
 
         uint8_t hora[6]= {0x00};
 
-        clock_t reloj = ClockCreate(5);
+        clock_t reloj = ClockCreate(5,sonaralarma);
 
         ClockSetTime(reloj,hora,6);
 
@@ -244,7 +268,7 @@ void test_tiempo_24horas(void){
 
        ((void *)0)
 
-       ), (UNITY_UINT)(119), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+       ), (UNITY_UINT)(127), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -262,7 +286,7 @@ void test_ajustar_alarma(void){
 
 
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
 
 
@@ -270,15 +294,15 @@ void test_ajustar_alarma(void){
 
     ClockGetTime(reloj,hora,6);
 
-    do {if ((ClockSetAlarm(reloj,ESPERANDO,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(132)));}} while(0);
+    do {if ((ClockSetAlarm(reloj,ESPERANDO,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(140)));}} while(0);
 
-    do {if ((ClockGetAlarm(reloj,alarma,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(133)));}} while(0);
+    do {if ((ClockGetAlarm(reloj,alarma,6))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(141)));}} while(0);
 
     UnityAssertEqualIntArray(( const void*)((ESPERANDO)), ( const void*)((alarma)), (UNITY_UINT32)((6)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(134), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+   ), (UNITY_UINT)(142), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
 }
 
@@ -294,7 +318,7 @@ void test_habilitar__alarma(void){
 
 
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
 
 
@@ -308,7 +332,7 @@ void test_habilitar__alarma(void){
 
 
 
-    do {if ((consultaralarma(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(149)));}} while(0);
+    do {if ((consultaralarma(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(157)));}} while(0);
 
 }
 
@@ -322,7 +346,7 @@ void test_deshabilitar_alarma(void){
 
 
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
 
 
@@ -336,65 +360,19 @@ void test_deshabilitar_alarma(void){
 
 
 
-    do {if (!(consultaralarma(reloj))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(163)));}} while(0);
+    do {if (!(consultaralarma(reloj))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(171)));}} while(0);
 
 }
-
-
-
-
-
-void test_alarma_igual_reloj(void){
-
-    uint8_t hora[6]={0,0,1,2,3,5};
-
-    uint8_t alarma[6]={0,0,1,2,3,5};
-
-
-
-    clock_t reloj = ClockCreate(5);
-
-
-
-
-
-    ClockSetTime(reloj,hora,6);
-
-    ClockSetAlarm(reloj,alarma,6);
-
-
-
-    ClockGetTime(reloj,hora,6);
-
-    ClockGetAlarm(reloj,alarma,6);
-
-
-
-    Alarmon(reloj);
-
-
-
-    UnityAssertEqualIntArray(( const void*)((hora)), ( const void*)((alarma)), (UNITY_UINT32)((6)), (
-
-   ((void *)0)
-
-   ), (UNITY_UINT)(182), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
-
-    do {if ((compara(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(183)));}} while(0);
-
-}
-
-
-
-
-
-
-
-
-
-
 
 void test_avanzar_reloj_suenaalarma(void){
+
+
+
+    buzzer=
+
+          0
+
+               ;
 
     uint8_t hora[6]={0,0,0,0,0,0};
 
@@ -402,7 +380,7 @@ void test_avanzar_reloj_suenaalarma(void){
 
 
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
 
 
@@ -436,13 +414,13 @@ void test_avanzar_reloj_suenaalarma(void){
 
    ((void *)0)
 
-   ), (UNITY_UINT)(209), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+   ), (UNITY_UINT)(221), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
-    do {if ((compara(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(210)));}} while(0);
+    do {if ((Alarmon(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(222)));}} while(0);
+
+    do {if ((buzzer)) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(223)));}} while(0);
 
 }
-
-
 
 
 
@@ -454,13 +432,21 @@ void test_avanzar_reloj_suenaalarma(void){
 
 void test_avanzar_reloj_nosuenaalarma(void){
 
+
+
+    buzzer=
+
+          0
+
+               ;
+
     uint8_t hora[6]={0,0,0,0,0,0};
 
     uint8_t alarma[6]={0,0,0,1,0,0};
 
 
 
-    clock_t reloj = ClockCreate(5);
+    clock_t reloj = ClockCreate(5,sonaralarma);
 
 
 
@@ -469,10 +455,6 @@ void test_avanzar_reloj_nosuenaalarma(void){
     ClockSetTime(reloj,hora,6);
 
     ClockSetAlarm(reloj,alarma,6);
-
-
-
-
 
 
 
@@ -494,8 +476,10 @@ void test_avanzar_reloj_nosuenaalarma(void){
 
    ((void *)0)
 
-   ), (UNITY_UINT)(236), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+   ), (UNITY_UINT)(248), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
 
-    do {if (!(compara(reloj))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(237)));}} while(0);
+    do {if (!(Alarmoff(reloj))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(249)));}} while(0);
+
+    do {if (!(buzzer)) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(250)));}} while(0);
 
 }

@@ -4,67 +4,63 @@
   :file: test_reloj.c
 :successes:
 - :test: test_reloj_arranca_hora_invalida
-  :line: 16
+  :line: 24
   :message: ''
   :unity_test_time: 0
 - :test: test_ajustar_hora
-  :line: 29
+  :line: 37
   :message: ''
   :unity_test_time: 0
 - :test: test_tiempo_unsegundo
-  :line: 50
+  :line: 58
   :message: ''
   :unity_test_time: 0
 - :test: test_tiempo_diezsegundo
-  :line: 62
+  :line: 70
   :message: ''
   :unity_test_time: 0
 - :test: test_tiempo_unminuto
-  :line: 74
+  :line: 82
   :message: ''
   :unity_test_time: 0
 - :test: test_tiempo_diezminutos
-  :line: 86
+  :line: 94
   :message: ''
   :unity_test_time: 0
 - :test: test_tiempo_unahora
-  :line: 98
+  :line: 106
   :message: ''
   :unity_test_time: 0
 - :test: test_tiempo_24horas
-  :line: 110
+  :line: 118
   :message: ''
   :unity_test_time: 0
 - :test: test_ajustar_alarma
-  :line: 123
+  :line: 131
   :message: ''
   :unity_test_time: 0
 - :test: test_habilitar__alarma
-  :line: 138
+  :line: 146
   :message: ''
   :unity_test_time: 0
 - :test: test_deshabilitar_alarma
-  :line: 152
-  :message: ''
-  :unity_test_time: 0
-- :test: test_alarma_igual_reloj
-  :line: 167
+  :line: 160
   :message: ''
   :unity_test_time: 0
 - :test: test_avanzar_reloj_suenaalarma
-  :line: 190
+  :line: 200
   :message: ''
   :unity_test_time: 0
 - :test: test_avanzar_reloj_nosuenaalarma
-  :line: 217
+  :line: 229
   :message: ''
   :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 14
-  :passed: 14
+  :total: 13
+  :passed: 13
   :failed: 0
   :ignored: 0
 :stdout: []
-:time: 0.008437428001343505
+:time: 0.01825974800158292

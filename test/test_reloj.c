@@ -13,10 +13,18 @@
 
 #define TICKS_PER_SECOND 5
 
+static bool buzzer;
+
+void sonaralarma(void);
+
+void sonaralarma(void){
+    buzzer=true;
+}
+
 void test_reloj_arranca_hora_invalida(void){
     static const uint8_t ESPERANDO[] = {0,0,0,0,0,0};
     uint8_t hora[6]= {0xFF};
-    clock_t reloj = ClockCreate(5);                            //cantidad de tics capara configurar el systick del reloj
+    clock_t reloj = ClockCreate(5,sonaralarma);                            //cantidad de tics capara configurar el systick del reloj
     TEST_ASSERT_FALSE(ClockGetTime(reloj,hora,6));             //guarda y compara reloj en hora si no son diferentes pasa el test
     TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);           //compara hora con esperando si son iguales pasa la prueba
 }
@@ -30,7 +38,7 @@ void test_ajustar_hora(void){
     static const uint8_t ESPERANDO[] = {1,2,3,4,0,0};
     uint8_t hora[6]= {0xFF};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
     //ClockSetTime(reloj,ESPERANDO,4);                            //comparo reloj con esperando (4 xq no comparo los segundos)
     TEST_ASSERT_TRUE(ClockSetTime(reloj,ESPERANDO,4));   
     TEST_ASSERT_TRUE(ClockGetTime(reloj,hora,6));       
@@ -50,7 +58,7 @@ void SimulateTime(uint32_t seconds, clock_t reloj){
 void test_tiempo_unsegundo(void){
         static const uint8_t ESPERANDO[] = {0,0,0,0,0,1};
         uint8_t hora[6]= {0x00};
-        clock_t reloj = ClockCreate(5);             
+        clock_t reloj = ClockCreate(5,sonaralarma);             
         ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
 
         SimulateTime(1, reloj);
@@ -62,7 +70,7 @@ void test_tiempo_unsegundo(void){
 void test_tiempo_diezsegundo(void){
         static const uint8_t ESPERANDO[] = {0,0,0,0,1,0};
         uint8_t hora[6]= {0x00};
-        clock_t reloj = ClockCreate(5);             
+        clock_t reloj = ClockCreate(5,sonaralarma);             
         ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
 
         SimulateTime(10, reloj);
@@ -74,7 +82,7 @@ void test_tiempo_diezsegundo(void){
 void test_tiempo_unminuto(void){
         static const uint8_t ESPERANDO[] = {0,0,0,1,0,0};
         uint8_t hora[6]= {0x00};
-        clock_t reloj = ClockCreate(5);             
+        clock_t reloj = ClockCreate(5,sonaralarma);             
         ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
 
         SimulateTime(60, reloj);
@@ -86,7 +94,7 @@ void test_tiempo_unminuto(void){
 void test_tiempo_diezminutos(void){
         static const uint8_t ESPERANDO[] = {0,0,1,0,0,0};
         uint8_t hora[6]= {0x00};
-        clock_t reloj = ClockCreate(5);             
+        clock_t reloj = ClockCreate(5,sonaralarma);             
         ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
 
         SimulateTime(600, reloj);
@@ -98,7 +106,7 @@ void test_tiempo_diezminutos(void){
 void test_tiempo_unahora(void){
         static const uint8_t ESPERANDO[] = {0,1,0,0,0,0};
         uint8_t hora[6]= {0x00};
-        clock_t reloj = ClockCreate(5);             
+        clock_t reloj = ClockCreate(5,sonaralarma);             
         ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
 
         SimulateTime(3600, reloj);
@@ -110,7 +118,7 @@ void test_tiempo_unahora(void){
 void test_tiempo_24horas(void){
         static const uint8_t ESPERANDO[] = {0,0,0,0,0,0};
         uint8_t hora[6]= {0x00};
-        clock_t reloj = ClockCreate(5);             
+        clock_t reloj = ClockCreate(5,sonaralarma);             
         ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
 
         SimulateTime(3600*24, reloj);
@@ -125,7 +133,7 @@ void test_ajustar_alarma(void){
     uint8_t hora[6]= {0x00};
     uint8_t alarma[6]= {0x00};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
     //ClockSetTime(reloj,ESPERANDO,4);   
     ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
     ClockGetTime(reloj,hora,6); //lo de reloj copio en horaq                   
@@ -139,7 +147,7 @@ void test_habilitar__alarma(void){
     uint8_t hora[6]= {0x00};
     uint8_t alarma[6]= {0x00};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
     //ClockSetTime(reloj,ESPERANDO,4);   
     ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
     ClockSetAlarm(reloj,alarma,6);   
@@ -153,7 +161,7 @@ void test_deshabilitar_alarma(void){
     uint8_t hora[6]= {0x00};
     uint8_t alarma[6]= {0x00};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
     //ClockSetTime(reloj,ESPERANDO,4);   
     ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
     ClockSetAlarm(reloj,alarma,6);   
@@ -163,12 +171,12 @@ void test_deshabilitar_alarma(void){
     TEST_ASSERT_FALSE(consultaralarma(reloj));
 }
 
-
+/*
 void test_alarma_igual_reloj(void){
     uint8_t hora[6]={0,0,1,2,3,5};
     uint8_t alarma[6]={0,0,1,2,3,5};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
   
 
     ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
@@ -183,15 +191,19 @@ void test_alarma_igual_reloj(void){
     TEST_ASSERT_TRUE(compara(reloj));
 }
 
+*/
+
 
 // Fijar la alarma y avanzar el reloj para que suene.
 
 
 void test_avanzar_reloj_suenaalarma(void){
+
+    buzzer=false;
     uint8_t hora[6]={0,0,0,0,0,0};
     uint8_t alarma[6]={0,0,0,1,0,0};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
   
 
     ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
@@ -207,24 +219,24 @@ void test_avanzar_reloj_suenaalarma(void){
     ClockGetAlarm(reloj,alarma,6); 
 
     TEST_ASSERT_EQUAL_UINT8_ARRAY(hora,alarma,6);
-    TEST_ASSERT_TRUE(compara(reloj));
+    TEST_ASSERT_TRUE(Alarmon(reloj));
+    TEST_ASSERT_TRUE(buzzer);
 }
-
 
 
 // Fijar la alarma, deshabilitarla y avanzar el reloj para no suene.
 
 void test_avanzar_reloj_nosuenaalarma(void){
+
+    buzzer=false;
     uint8_t hora[6]={0,0,0,0,0,0};
     uint8_t alarma[6]={0,0,0,1,0,0};
 
-    clock_t reloj = ClockCreate(5);             
+    clock_t reloj = ClockCreate(5,sonaralarma);             
   
 
     ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
     ClockSetAlarm(reloj,alarma,6);  
-
- 
 
     Alarmoff(reloj);
 
@@ -234,7 +246,8 @@ void test_avanzar_reloj_nosuenaalarma(void){
     ClockGetAlarm(reloj,alarma,6); 
 
     TEST_ASSERT_EQUAL_UINT8_ARRAY(hora,alarma,6);
-    TEST_ASSERT_FALSE(compara(reloj));
+    TEST_ASSERT_FALSE(Alarmoff(reloj));
+    TEST_ASSERT_FALSE(buzzer);
 }
 
 
