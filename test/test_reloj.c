@@ -186,3 +186,25 @@ void test_deshabilitar_alarma(void){
 
     TEST_ASSERT_FALSE(consultaralarma(reloj));
 }
+
+
+void test_alarma_igual_reloj(void){
+    uint8_t hora[6]={0,0,1,2,3,5};
+    uint8_t alarma[6]={0,0,1,2,3,5};
+
+    clock_t reloj = ClockCreate(5);             
+  
+
+    ClockSetTime(reloj,hora,6); //lo de hora copio en reloj                  
+    ClockSetAlarm(reloj,alarma,6);  
+
+    ClockGetTime(reloj,hora,6);   //lo de reloj lo compio en hora
+    ClockGetAlarm(reloj,alarma,6);  
+
+    Alarmon(reloj);
+
+    TEST_ASSERT_EQUAL_UINT8_ARRAY(hora,alarma,6);
+    TEST_ASSERT_TRUE(compara(reloj));
+}
+
+

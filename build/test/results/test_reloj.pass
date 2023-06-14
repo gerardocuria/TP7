@@ -47,12 +47,18 @@
   :line: 176
   :message: ''
   :unity_test_time: 0
+- :test: test_alarma_igual_reloj
+  :line: 191
+  :message: ''
+  :unity_test_time: 0
 :failures: []
 :ignores: []
 :counts:
-  :total: 11
-  :passed: 11
+  :total: 12
+  :passed: 12
   :failed: 0
   :ignored: 0
-:stdout: []
-:time: 0.008936623999034055
+:stdout:
+- ''
+- ''
+:time: 0.008353166998858796

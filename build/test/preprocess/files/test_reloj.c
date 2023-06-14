@@ -341,3 +341,47 @@ void test_deshabilitar_alarma(void){
     do {if (!(consultaralarma(reloj))) {} else {UnityFail( ((" Expected FALSE Was TRUE")), (UNITY_UINT)((UNITY_UINT)(187)));}} while(0);
 
 }
+
+
+
+
+
+void test_alarma_igual_reloj(void){
+
+    uint8_t hora[6]={0,0,1,2,3,5};
+
+    uint8_t alarma[6]={0,0,1,2,3,5};
+
+
+
+    clock_t reloj = ClockCreate(5);
+
+
+
+
+
+    ClockSetTime(reloj,hora,6);
+
+    ClockSetAlarm(reloj,alarma,6);
+
+
+
+    ClockGetTime(reloj,hora,6);
+
+    ClockGetAlarm(reloj,alarma,6);
+
+
+
+    Alarmon(reloj);
+
+
+
+    UnityAssertEqualIntArray(( const void*)((hora)), ( const void*)((alarma)), (UNITY_UINT32)((6)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(206), UNITY_DISPLAY_STYLE_UINT8, UNITY_ARRAY_TO_ARRAY);
+
+    do {if ((compara(reloj))) {} else {UnityFail( ((" Expected TRUE Was FALSE")), (UNITY_UINT)((UNITY_UINT)(207)));}} while(0);
+
+}

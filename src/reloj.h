@@ -22,3 +22,5 @@ bool Alarmon(clock_t reloj);
 bool Alarmoff(clock_t reloj);
 
 bool consultaralarma(clock_t reloj);
+
+bool compara(clock_t reloj);

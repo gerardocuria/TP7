@@ -9,6 +9,7 @@ struct alarm_s {
     uint8_t alarma_actual[6];
     bool valida;
     bool habilitada;
+    bool sonar;
 };
 
 struct clock_s {
@@ -109,4 +110,13 @@ bool Alarmoff(clock_t reloj){
 bool consultaralarma(clock_t reloj){
     bool habilitada = reloj->alarm->habilitada;
     return habilitada;
+}
+
+
+bool compara(clock_t reloj){
+    if(strcmp(reloj->alarm->alarma_actual,reloj->hora_actual) == 0 && reloj->alarm->habilitada==true){
+        reloj->alarm->sonar = true;
+    }
+
+    return (reloj->alarm->sonar);
 }
