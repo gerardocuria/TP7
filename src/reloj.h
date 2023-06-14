@@ -14,3 +14,5 @@ bool ClockSetTicsPerSecond(clock_t reloj, int tics_por_segundo);
 void SetAlarmTime(clock_t reloj, const uint8_t* hora, int size);
 
 const uint8_t* GetAlarmTime(clock_t reloj);
+
+void ClockTick(clock_t reloj);

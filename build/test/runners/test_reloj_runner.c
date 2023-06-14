@@ -12,6 +12,7 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_reloj_arranca_hora_invalida(void);
 extern void test_ajustar_hora(void);
+extern void test_base_tiempo(void);
 
 
 /*=======Mock Management=====*/
@@ -82,8 +83,9 @@ static void run_test(UnityTestFunction func, const char* name, UNITY_LINE_TYPE l
 int main(void)
 {
   UnityBegin("test_reloj.c");
-  run_test(test_reloj_arranca_hora_invalida, "test_reloj_arranca_hora_invalida", 7);
-  run_test(test_ajustar_hora, "test_ajustar_hora", 20);
+  run_test(test_reloj_arranca_hora_invalida, "test_reloj_arranca_hora_invalida", 9);
+  run_test(test_ajustar_hora, "test_ajustar_hora", 22);
+  run_test(test_base_tiempo, "test_base_tiempo", 43);
 
   return UnityEnd();
 }

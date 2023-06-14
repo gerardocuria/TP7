@@ -4,6 +4,8 @@
 #include "unity.h"
 #include "reloj.h"
 
+#define TICKS_PER_SECOND 5
+
 void test_reloj_arranca_hora_invalida(void){
     static const uint8_t ESPERANDO[] = {0,0,0,0,0,0};
     uint8_t hora[6]= {0xFF};
@@ -20,12 +22,37 @@ void test_reloj_arranca_hora_invalida(void){
 void test_ajustar_hora(void){
     static const uint8_t ESPERANDO[] = {1,2,3,4,0,0};
     uint8_t hora[6]= {0xFF};
+
     clock_t reloj = ClockCreate(5);             
     //ClockSetTime(reloj,ESPERANDO,4);                            //comparo reloj con esperando (4 xq no comparo los segundos)
     TEST_ASSERT_TRUE(ClockSetTime(reloj,ESPERANDO,4));   
     TEST_ASSERT_TRUE(ClockGetTime(reloj,hora,6));       
     TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
 }
+
+
+void SimulateTime(uint32_t seconds, clock_t reloj){
+    for(int second = 0; second < seconds; second++){
+        for(int index= 0;index < TICKS_PER_SECOND; index++){
+            ClockTick(reloj);
+        }
+    }
+}
+
+
+void test_base_tiempo(void){
+        static const uint8_t ESPERANDO[] = {0,0,0,0,0,1};
+        uint8_t hora[6]= {0x00};
+        clock_t reloj = ClockCreate(5);             
+        ClockSetTime(reloj,hora,6); //lo de hora copio en reloj
+
+        SimulateTime(1, reloj);
+
+        TEST_ASSERT_TRUE(ClockGetTime(reloj,hora,6)); //lo de reloj copio en hora
+        TEST_ASSERT_EQUAL_UINT8_ARRAY(ESPERANDO,hora,6);
+}
+
+
 
 
 /*
